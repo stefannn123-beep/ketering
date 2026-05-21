@@ -6,604 +6,472 @@
 <title>Anketa — Aplikacija za ketering</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0F1117;
+  --surface: #1A1D27;
+  --surface2: #22263A;
+  --card: #1E2133;
+  --brand: #6C8EFF;
+  --brand2: #A78BFA;
+  --brand-dim: rgba(108,142,255,0.12);
+  --brand-dim2: rgba(167,139,250,0.12);
+  --text: #F0F2FF;
+  --text-muted: #8B90A8;
+  --text-hint: #555A72;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.14);
+  --danger: #FF6B6B;
+  --danger-dim: rgba(255,107,107,0.12);
+  --success: #34D399;
+  --success-dim: rgba(52,211,153,0.12);
+  --warn: #FBBF24;
+  --warn-dim: rgba(251,191,36,0.12);
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(108,142,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(167,139,250,0.1) 0%, transparent 55%);
+}
 
-  :root {
-    --bg: #F7F5F2;
-    --white: #FFFFFF;
-    --brand: #2D5BE3;
-    --brand-light: #EEF2FD;
-    --brand-dark: #1A3FA8;
-    --text: #1A1A2E;
-    --text-muted: #6B7280;
-    --text-hint: #9CA3AF;
-    --border: #E5E7EB;
-    --border-hover: #D1D5DB;
-    --success: #10B981;
-    --success-light: #ECFDF5;
-    --danger: #EF4444;
-    --danger-light: #FEF2F2;
-    --radius: 12px;
-    --radius-sm: 8px;
-  }
+/* HEADER */
+header {
+  background: rgba(15,17,23,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.logo {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-icon {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.header-badge {
+  font-size: 11px;
+  background: var(--brand-dim);
+  color: var(--brand);
+  padding: 5px 13px;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 1px solid rgba(108,142,255,0.2);
+  letter-spacing: 0.3px;
+}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+/* MAIN */
+main { flex: 1; max-width: 660px; margin: 0 auto; padding: 2.5rem 1.5rem; width: 100%; }
 
-  /* HEADER */
-  header {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .logo {
-    font-family: 'Lora', serif;
-    font-size: 18px;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .logo-dot {
-    width: 8px; height: 8px;
-    background: var(--brand);
-    border-radius: 50%;
-  }
-  .header-badge {
-    font-size: 12px;
-    background: var(--brand-light);
-    color: var(--brand);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 500;
-  }
+/* INTRO CARD */
+.intro-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  border-radius: 20px 20px 0 0;
+}
+.intro-title {
+  font-family: 'Lora', serif;
+  font-size: 26px;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+.intro-title span { color: var(--brand); font-style: italic; }
+.intro-sub { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+.intro-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.stat-pill {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+}
+.stat-num { font-size: 20px; font-weight: 600; color: var(--brand); }
+.stat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.btn-start {
+  width: 100%;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-start:hover { opacity: 0.88; }
 
-  /* MAIN */
-  main {
-    flex: 1;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem;
-    width: 100%;
-  }
+/* PROGRESS */
+.progress-wrap { margin-bottom: 1.75rem; }
+.progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.progress-meta span { font-size: 12px; color: var(--text-hint); }
+.progress-meta strong { font-size: 12px; color: var(--brand); font-weight: 600; }
+.progress-track { height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  border-radius: 2px;
+  transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.step-dots { display: flex; gap: 4px; justify-content: center; margin-top: 10px; }
+.step-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--surface2);
+  transition: all 0.3s;
+}
+.step-dot.done { background: var(--brand2); }
+.step-dot.active { background: var(--brand); width: 18px; border-radius: 3px; }
 
-  /* PROGRESS */
-  .progress-wrap { margin-bottom: 2rem; }
-  .progress-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  .progress-meta span {
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-  .progress-meta strong {
-    font-size: 13px;
-    color: var(--brand);
-    font-weight: 600;
-  }
-  .progress-track {
-    height: 5px;
-    background: var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--brand);
-    border-radius: 3px;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+/* QUESTION CARD */
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+.q-card::after {
+  content: attr(data-num);
+  position: absolute;
+  right: 1.5rem; top: 1.5rem;
+  font-size: 64px;
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+  pointer-events: none;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+.q-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--brand); font-weight: 600; margin-bottom: 10px; }
+.q-text { font-family: 'Lora', serif; font-size: 19px; line-height: 1.5; color: var(--text); margin-bottom: 1.25rem; }
+.type-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; padding: 4px 10px; border-radius: 6px; margin-bottom: 1rem; font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.type-multi   { background: var(--brand-dim);  color: var(--brand); border: 1px solid rgba(108,142,255,0.2); }
+.type-correct { background: var(--success-dim); color: var(--success); border: 1px solid rgba(52,211,153,0.2); }
+.type-avoid   { background: var(--danger-dim);  color: var(--danger); border: 1px solid rgba(255,107,107,0.2); }
+.type-open    { background: var(--warn-dim);    color: var(--warn);   border: 1px solid rgba(251,191,36,0.2); }
 
-  /* QUESTION CARD */
-  .q-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    animation: slideIn 0.25s ease;
-  }
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .q-eyebrow {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--brand);
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .q-text {
-    font-family: 'Lora', serif;
-    font-size: 20px;
-    line-height: 1.45;
-    color: var(--text);
-    margin-bottom: 1.5rem;
-  }
-  .multi-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    color: var(--text-muted);
-    background: var(--bg);
-    padding: 4px 10px;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-  }
-  .multi-hint svg { flex-shrink: 0; }
+/* OPTIONS */
+.options { display: flex; flex-direction: column; gap: 8px; }
+.opt {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 13px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  background: var(--surface);
+  user-select: none;
+}
+.opt:hover { border-color: var(--border-hover); background: var(--surface2); }
+.opt.selected { border-color: var(--brand); background: var(--brand-dim); }
+.opt.avoid-sel { border-color: var(--danger) !important; background: var(--danger-dim) !important; }
+.opt-indicator {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid var(--text-hint);
+  flex-shrink: 0; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+  background: transparent;
+}
+.opt.selected .opt-indicator { background: var(--brand); border-color: var(--brand); }
+.opt.avoid-sel .opt-indicator { background: var(--danger); border-color: var(--danger); }
+.opt-tick { width: 9px; height: 9px; fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: opacity 0.15s; }
+.opt.selected .opt-tick, .opt.avoid-sel .opt-tick { opacity: 1; }
+.opt-text { font-size: 14px; line-height: 1.55; color: var(--text-muted); }
+.opt:hover .opt-text { color: var(--text); }
+.opt.selected .opt-text { color: var(--brand); font-weight: 500; }
+.opt.avoid-sel .opt-text { color: var(--danger); font-weight: 500; }
 
-  /* OPTIONS */
-  .options { display: flex; flex-direction: column; gap: 8px; }
-  .opt {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 13px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    background: var(--white);
-    user-select: none;
-  }
-  .opt:hover { border-color: var(--border-hover); background: #FAFAFA; }
-  .opt.selected {
-    border-color: var(--brand);
-    background: var(--brand-light);
-  }
-  .opt-indicator {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    flex-shrink: 0;
-    margin-top: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-    background: var(--white);
-  }
-  .opt.selected .opt-indicator {
-    background: var(--brand);
-    border-color: var(--brand);
-  }
-  .opt-tick {
-    width: 9px; height: 9px;
-    fill: none;
-    stroke: #fff;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    opacity: 0;
-    transition: opacity 0.15s;
-  }
-  .opt.selected .opt-tick { opacity: 1; }
-  .opt-text {
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--text);
-  }
-  .opt.selected .opt-text { color: var(--brand-dark); font-weight: 500; }
+/* OPEN FIELD */
+.open-field {
+  width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 13px 15px; font-family: 'Inter', sans-serif; font-size: 14px;
+  color: var(--text); background: var(--surface); resize: vertical; min-height: 110px;
+  transition: border-color 0.15s; outline: none; line-height: 1.65;
+}
+.open-field:focus { border-color: var(--brand); background: var(--surface2); }
+.open-field::placeholder { color: var(--text-hint); }
+.open-char { font-size: 11px; color: var(--text-hint); text-align: right; margin-top: 5px; }
 
-  /* ERROR */
-  .err-msg {
-    font-size: 12px;
-    color: var(--danger);
-    margin-top: 10px;
-    padding: 8px 12px;
-    background: var(--danger-light);
-    border-radius: 6px;
-    display: none;
-  }
-  .err-msg.show { display: block; }
+/* ERROR */
+.err-msg { font-size: 12px; color: var(--danger); margin-top: 10px; padding: 8px 12px; background: var(--danger-dim); border-radius: 6px; border: 1px solid rgba(255,107,107,0.2); display: none; }
+.err-msg.show { display: block; }
 
-  /* NAV */
-  .nav-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-  }
-  .btn {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 11px 22px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-  }
-  .btn-secondary {
-    background: var(--white);
-    border: 1.5px solid var(--border);
-    color: var(--text-muted);
-  }
-  .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
-  .btn-primary {
-    background: var(--brand);
-    color: #fff;
-  }
-  .btn-primary:hover { background: var(--brand-dark); }
-  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+/* NAV */
+.nav-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.btn { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; padding: 11px 22px; border-radius: var(--radius-sm); cursor: pointer; border: none; transition: all 0.15s; display: inline-flex; align-items: center; gap: 7px; }
+.btn-secondary { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); }
+.btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
+.btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand2)); color: #fff; font-weight: 600; }
+.btn-primary:hover { opacity: 0.88; }
 
-  /* DONE SCREEN */
-  .done-screen {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2.5rem 2rem;
-    text-align: center;
-    animation: slideIn 0.3s ease;
-  }
-  .done-icon-wrap {
-    width: 64px; height: 64px;
-    background: var(--success-light);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1.25rem;
-  }
-  .done-title {
-    font-family: 'Lora', serif;
-    font-size: 26px;
-    color: var(--text);
-    margin-bottom: .5rem;
-  }
-  .done-sub {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .summary-title {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-hint);
-    font-weight: 600;
-    text-align: left;
-    margin-bottom: 10px;
-  }
-  .summary-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem; }
-  .sum-row {
-    background: var(--bg);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    text-align: left;
-  }
-  .sum-q { font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
-  .sum-a { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.5; }
-  .btn-restart {
-    background: var(--text);
-    color: #fff;
-    padding: 12px 28px;
-    border-radius: var(--radius-sm);
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: opacity 0.15s;
-  }
-  .btn-restart:hover { opacity: 0.85; }
+/* DONE */
+.done-screen { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem 2rem; text-align: center; animation: fadeUp 0.3s ease; position: relative; overflow: hidden; }
+.done-screen::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--success), var(--brand)); border-radius: 20px 20px 0 0; }
+.done-icon-wrap { width: 64px; height: 64px; background: var(--success-dim); border: 1px solid rgba(52,211,153,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+.done-title { font-family: 'Lora', serif; font-size: 26px; color: var(--text); margin-bottom: .5rem; }
+.done-sub { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; max-width: 420px; margin-left: auto; margin-right: auto; }
+.sum-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-hint); font-weight: 600; text-align: left; margin-bottom: 10px; }
+.summary-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem; }
+.sum-row { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; text-align: left; }
+.sum-q { font-size: 11px; color: var(--text-hint); margin-bottom: 3px; }
+.sum-a { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.5; }
+.sum-a.avoid { color: var(--danger); }
+.sum-a.open-ans { color: var(--warn); font-style: italic; }
+.btn-restart { background: var(--surface2); color: var(--text); border: 1px solid var(--border); padding: 12px 28px; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.btn-restart:hover { border-color: var(--border-hover); background: var(--card); }
 
-  @media (max-width: 500px) {
-    main { padding: 1.5rem 1rem; }
-    .q-card { padding: 1.5rem; }
-    .q-text { font-size: 17px; }
-    header { padding: 0 1rem; }
-  }
+@media(max-width:500px) {
+  main { padding: 1.5rem 1rem; }
+  .q-card { padding: 1.5rem; }
+  .q-text { font-size: 17px; }
+  header { padding: 0 1rem; }
+  .intro-stats { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">
-    <div class="logo-dot"></div>
+    <div class="logo-icon">🍽</div>
     Istraživanje korisnika
   </div>
-  <div class="header-badge">Projekat SI3PSI</div>
+  <div class="header-badge">SI3PSI · 2026</div>
 </header>
 
 <main id="app"></main>
 
 <script>
-const QUESTIONS = [
-  {
-    id: 1,
-    text: "Kako bi najradije koristio/la aplikaciju za naručivanje keteringa?",
-    multi: false,
-    opts: [
-      "Mobilni telefon (Android ili iOS)",
-      "Web pretraživač na računaru ili laptopu",
-      "Tablet uređaj",
-      "Podjednako mi odgovara na svim uređajima"
-    ]
-  },
-  {
-    id: 2,
-    text: "Koji vizuelni stil aplikacije ti se najviše sviđa?",
-    multi: false,
-    opts: [
-      "Minimalistički i čist — svetle boje, puno belog prostora",
-      "Topao i elegantan — tamne boje, zlatni i braon detalji",
-      "Živopisan i veseo — jarke boje, ilustracije, ikonice",
-      "Profesionalni i neutralni — sivi tonovi, poslovni izgled"
-    ]
-  },
-  {
-    id: 3,
-    text: "Šta ti je najvažnije kada biraš ketering paket? (možeš izabrati više)",
-    multi: true,
-    opts: [
-      "Cena po osobi i ukupni trošak",
-      "Kvalitetne fotografije jela i prezentacije",
-      "Opis sastojaka, alergena i nutritivnih vrednosti",
-      "Ocene i recenzije prethodnih korisnika",
-      "Dostupnost na željeni datum i vreme",
-      "Brzina dostave i pouzdanost"
-    ]
-  },
-  {
-    id: 4,
-    text: "Kako bi voleo/la da se ketering paketi prikazuju na ekranu?",
-    multi: false,
-    opts: [
-      "Kartice u mrežnom rasporedu (grid sa slikama)",
-      "Lista sa detaljnim opisima i cenama",
-      "Klizač sa velikim fotografijama (carousel)",
-      "Tabela sa poređenjem paketa i opcija"
-    ]
-  },
-  {
-    id: 5,
-    text: "Koji način filtriranja i pretrage ponude ti je najkorisniji?",
-    multi: false,
-    opts: [
-      "Po tipu događaja — rođendan, svadba, poslovni skup…",
-      "Po cenovnom rangu — od najjeftinije do najskuplje",
-      "Po broju osoba na događaju",
-      "Po oceni, popularnosti i broju narudžbina"
-    ]
-  },
-  {
-    id: 6,
-    text: "Kako bi voleo/la da izgleda sam proces naručivanja?",
-    multi: false,
-    opts: [
-      "Sve na jednoj dugačkoj stranici (scroll kroz korake)",
-      "Čarobnjak korak-po-korak sa jasno vidljivim napretkom",
-      "Brza narudžbina — minimum klikova, bez registracije",
-      "Interaktivni razgovor sa virtuelnim asistentom (chatbot)"
-    ]
-  },
-  {
-    id: 7,
-    text: "Koji način plaćanja ti je važan da bude podržan? (možeš izabrati više)",
-    multi: true,
-    opts: [
-      "Gotovina pri isporuci ili preuzimanju",
-      "Online plaćanje karticom (Visa, Mastercard)",
-      "PayPal ili digitalni novčanici",
-      "Lojalni program — popusti za stalne korisnike",
-      "Faktura za pravna lica i firme"
-    ]
-  },
-  {
-    id: 8,
-    text: "Šta bi te najviše motivisalo da kreiraš korisnički nalog u aplikaciji?",
-    multi: false,
-    opts: [
-      "Praćenje istorije i ponovljeno naručivanje omiljenog",
-      "Personalizovane preporuke na osnovu prethodnih izbora",
-      "Ekskluzivni popusti i akcije za registrovane korisnike",
-      "Brže naručivanje bez ponovnog unosa podataka",
-      "Ne bi me ništa motivisalo — gostujuća narudžbina mi je dovoljna"
-    ]
-  },
-  {
-    id: 9,
-    text: "Koje dodatne funkcionalnosti bi voleo/la da postoje u aplikaciji? (možeš izabrati više)",
-    multi: true,
-    opts: [
-      "Kalkulator ukupne cene koji se ažurira u realnom vremenu",
-      "Mapa sa praćenjem dostave uživo",
-      "Ocenjivanje i pisanje recenzije posle svake narudžbine",
-      "Zakazivanje ketering usluge daleko unapred (do 30 dana)",
-      "Push notifikacije o statusu narudžbine",
-      "Podrška u četu uživo sa operaterom"
-    ]
-  },
-  {
-    id: 10,
-    text: "Koliko ti je bitno da aplikacija radi brzo i bez kašnjenja?",
-    multi: false,
-    opts: [
-      "Izuzetno bitno — ne prihvatam čekanje duže od 1 sekunde",
-      "Bitno — prihvatam učitavanje do 3 sekunde",
-      "Umereno — do 5 sekundi je ok ako je sadržaj kvalitetan",
-      "Nije mi prioritet, bitno mi je da aplikacija bude funkcionalna"
-    ]
-  }
+const QS = [
+  { id:1, text:"Na kom uređaju bi najradije koristio/la aplikaciju?", type:"single",
+    opts:["Mobilni telefon (Android ili iOS)","Web pretraživač na računaru","Tablet uređaj","Podjednako na svim uređajima"] },
+  { id:2, text:"Koji vizuelni stil aplikacije ti se najviše sviđa?", type:"single",
+    opts:["Minimalistički i čist — svetle boje, puno prostora","Topao i elegantan — tamne boje, zlatni detalji","Živopisan i veseo — jarke boje i ilustracije","Profesionalni i neutralni — sivi tonovi, poslovni izgled"] },
+  { id:3, text:"Izaberi tačno 2 najvažnija elementa pri izboru ketering paketa.", type:"correct", n:2,
+    opts:["Cena po osobi i ukupni trošak","Kvalitetne fotografije jela","Opis sastojaka i alergena","Ocene i recenzije korisnika","Dostupnost na željeni datum","Brzina i pouzdanost dostave"] },
+  { id:4, text:"Kako bi voleo/la da se paketi prikazuju na ekranu?", type:"single",
+    opts:["Kartice u mrežnom rasporedu (grid)","Lista sa detaljnim opisima i cenama","Klizač sa velikim fotografijama","Tabela za poređenje paketa"] },
+  { id:5, text:"Izaberi tačno 3 funkcionalnosti koje smatraš obaveznim.", type:"correct", n:3,
+    opts:["Pretraga i filtriranje ponude","Korpa sa pregledom narudžbine","Online plaćanje karticom","Praćenje statusa dostave","Sistem ocenjivanja i recenzija","Podrška u četu uživo","Korisnički profil sa istorijom","Notifikacije o akcijama i popustima"] },
+  { id:6, text:"Kako bi voleo/la da izgleda proces naručivanja?", type:"single",
+    opts:["Čarobnjak korak-po-korak sa vidljivim napretkom","Sve na jednoj stranici kroz skrolovanje","Brza narudžbina — minimum klikova, bez registracije","Interaktivni razgovor sa virtuelnim asistentom"] },
+  { id:7, text:"Koji načini plaćanja su ti važni?", type:"multi",
+    opts:["Gotovina pri isporuci","Online plaćanje karticom (Visa, Mastercard)","PayPal ili digitalni novčanici","Lojalni program — popusti za stalne korisnike","Faktura za firme i pravna lica"] },
+  { id:8, text:"Šta NE bi hteo/la da postoji u aplikaciji? Označi sve što ti smeta.", type:"avoid",
+    opts:["Obavezna registracija pre svake narudžbine","Previše reklama i pop-up prozora","Sporo učitavanje i loše performanse","Komplikovana navigacija sa previše koraka","Skriveni troškovi koji se pojave pri plaćanju","Nemogućnost otkazivanja ili izmene narudžbine","Nedostatak informacija o alergenima"] },
+  { id:9, text:"Koje dodatne funkcionalnosti bi voleo/la?", type:"multi",
+    opts:["Kalkulator cene u realnom vremenu","Mapa praćenja dostave uživo","Zakazivanje unapred (do 30 dana)","Opcija ponavljanja prethodne narudžbine","Deljenje troškova sa drugima (split bill)","Tamni mod interfejsa (dark mode)"] },
+  { id:10, text:"Upiši svoje posebne zahteve ili napomene za dizajn aplikacije.", type:"open", optional:true,
+    placeholder:"Na primer: 'Važno mi je filtriranje po alergenima', 'Aplikacija treba da podržava srpski jezik', 'Voleo/la bih opciju za grupnu narudžbinu'…" }
 ];
 
-let current = 0;
-const answers = {};
+let cur = -1;
+const ans = {};
 
-function pct() {
-  return Math.round((current / QUESTIONS.length) * 100);
+const SVG = {
+  right:`<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  left:`<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  tick:`<svg class="opt-tick" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg>`,
+  check:`<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  xmark:`<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  info:`<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  pencil:`<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M11 2l3 3-9 9H2v-3L11 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+};
+
+function badge(q) {
+  if(q.type==='correct') return `<div class="type-badge type-correct">${SVG.check} Izaberi tačno ${q.n} odgovora</div>`;
+  if(q.type==='multi')   return `<div class="type-badge type-multi">${SVG.info} Možeš izabrati više odgovora</div>`;
+  if(q.type==='avoid')   return `<div class="type-badge type-avoid">${SVG.xmark} Označi sve što ti NE odgovara</div>`;
+  if(q.type==='open')    return `<div class="type-badge type-open">${SVG.pencil} Slobodan odgovor${q.optional?' — opciono':''}</div>`;
+  return '';
 }
 
-function truncate(str, n) {
-  return str.length > n ? str.substring(0, n) + '…' : str;
+function dots() {
+  return QS.map((_,i) => {
+    let cls = i < cur ? 'done' : (i === cur ? 'active' : '');
+    return `<div class="step-dot ${cls}"></div>`;
+  }).join('');
 }
 
 function render() {
   const app = document.getElementById('app');
-  if (current >= QUESTIONS.length) {
-    renderDone(app);
-    return;
+  if (cur === -1) { renderIntro(app); return; }
+  if (cur >= QS.length) { renderDone(app); return; }
+
+  const q = QS[cur];
+  const sel = ans[q.id] || [];
+  const pct = Math.round(cur / QS.length * 100);
+
+  let body = '';
+  if (q.type === 'open') {
+    const saved = ans[q.id] || '';
+    body = `<textarea class="open-field" id="oField" maxlength="500" placeholder="${q.placeholder}" oninput="saveOpen(${q.id})">${saved}</textarea><div class="open-char" id="oChar">${saved.length}/500 znakova</div>`;
+  } else {
+    body = `<div class="options">${q.opts.map((o,i) => {
+      const s = sel.includes(i);
+      const cls = s ? (q.type==='avoid' ? ' avoid-sel' : ' selected') : '';
+      return `<div class="opt${cls}" onclick="pick(${q.id},${i},'${q.type}')"><div class="opt-indicator">${SVG.tick}</div><span class="opt-text">${o}</span></div>`;
+    }).join('')}</div>`;
   }
-  const q = QUESTIONS[current];
-  const sel = answers[q.id] || [];
 
   app.innerHTML = `
     <div class="progress-wrap">
-      <div class="progress-meta">
-        <span>Napredak</span>
-        <strong>${pct()}% završeno</strong>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" style="width: ${pct()}%"></div>
-      </div>
+      <div class="progress-meta"><span>Pitanje ${cur+1} od ${QS.length}</span><strong>${pct}% završeno</strong></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="step-dots">${dots()}</div>
     </div>
-
-    <div class="q-card">
-      <div class="q-eyebrow">Pitanje ${current + 1} od ${QUESTIONS.length}</div>
+    <div class="q-card" data-num="${cur+1}">
+      <div class="q-eyebrow">Pitanje ${cur+1}</div>
       <div class="q-text">${q.text}</div>
-      ${q.multi ? `
-        <div class="multi-hint">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="7" stroke="#6B7280" stroke-width="1.5"/>
-            <path d="M8 7v4M8 5v.5" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          Možeš izabrati više odgovora
-        </div>
-      ` : ''}
-      <div class="options">
-        ${q.opts.map((o, i) => `
-          <div class="opt${sel.includes(i) ? ' selected' : ''}" onclick="pick(${q.id}, ${i}, ${q.multi})">
-            <div class="opt-indicator">
-              <svg class="opt-tick" viewBox="0 0 10 10">
-                <polyline points="1.5,5 4,7.5 8.5,2.5"/>
-              </svg>
-            </div>
-            <span class="opt-text">${o}</span>
-          </div>
-        `).join('')}
-      </div>
-      <div class="err-msg" id="errMsg">Molimo izaberi bar jedan odgovor pre nego što nastaviš.</div>
+      ${badge(q)}
+      ${body}
+      <div class="err-msg" id="err"></div>
     </div>
-
     <div class="nav-row">
-      <div>
-        ${current > 0 ? `
-          <button class="btn btn-secondary" onclick="goBack()">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Nazad
-          </button>
-        ` : '<span></span>'}
-      </div>
-      <button class="btn btn-primary" onclick="goNext()">
-        ${current === QUESTIONS.length - 1 ? 'Završi anketu' : 'Sledeće pitanje'}
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-  `;
+      <div>${cur > 0 ? `<button class="btn btn-secondary" onclick="goBack()">${SVG.left} Nazad</button>` : '<span></span>'}</div>
+      <button class="btn btn-primary" onclick="goNext()">${cur===QS.length-1?'Završi anketu':'Sledeće pitanje'} ${SVG.right}</button>
+    </div>`;
 }
 
-function pick(qid, idx, multi) {
-  if (!answers[qid]) answers[qid] = [];
-  if (multi) {
-    const pos = answers[qid].indexOf(idx);
-    if (pos > -1) answers[qid].splice(pos, 1);
-    else answers[qid].push(idx);
+function renderIntro(app) {
+  app.innerHTML = `
+    <div class="intro-card">
+      <div class="q-eyebrow">Elektrotehnički fakultet · SI3PSI</div>
+      <div class="intro-title">Pomozi nam da dizajniramo <span>bolju aplikaciju</span></div>
+      <div class="intro-sub">Ova kratka anketa prikuplja tvoje preference o izgledu i funkcionalnostima aplikacije za naručivanje keteringa. Tvoji odgovori direktno utiču na dizajn projekta.</div>
+      <div class="intro-stats">
+        <div class="stat-pill"><div class="stat-num">10</div><div class="stat-lbl">pitanja</div></div>
+        <div class="stat-pill"><div class="stat-num">~3</div><div class="stat-lbl">minuta</div></div>
+        <div class="stat-pill"><div class="stat-num">100%</div><div class="stat-lbl">anonimno</div></div>
+      </div>
+      <button class="btn-start" onclick="startSurvey()">Počni anketu ${SVG.right}</button>
+    </div>`;
+}
+
+function startSurvey() { cur = 0; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function pick(qid, idx, type) {
+  if (!ans[qid]) ans[qid] = [];
+  const q = QS.find(x => x.id === qid);
+  if (type === 'single') {
+    ans[qid] = [idx];
+  } else if (type === 'correct') {
+    const p = ans[qid].indexOf(idx);
+    if (p > -1) { ans[qid].splice(p, 1); }
+    else {
+      if (ans[qid].length >= q.n) { showErr(`Možeš izabrati tačno ${q.n} odgovora. Ukloni jedan pa dodaj drugi.`); return; }
+      ans[qid].push(idx);
+    }
   } else {
-    answers[qid] = [idx];
+    const p = ans[qid].indexOf(idx);
+    if (p > -1) ans[qid].splice(p, 1); else ans[qid].push(idx);
   }
-  document.getElementById('errMsg').classList.remove('show');
-  const q = QUESTIONS.find(x => x.id === qid);
+  hideErr();
   document.querySelectorAll('.opt').forEach((el, i) => {
-    el.classList.toggle('selected', answers[qid].includes(i));
+    const s = ans[qid].includes(i);
+    el.className = 'opt' + (s ? (type==='avoid' ? ' avoid-sel' : ' selected') : '');
   });
 }
 
-function goNext() {
-  const q = QUESTIONS[current];
-  if (!answers[q.id] || answers[q.id].length === 0) {
-    document.getElementById('errMsg').classList.add('show');
-    return;
-  }
-  current++;
-  render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function saveOpen(qid) {
+  const el = document.getElementById('oField');
+  ans[qid] = el.value;
+  document.getElementById('oChar').textContent = el.value.length + '/500 znakova';
 }
 
-function goBack() {
-  if (current > 0) { current--; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function showErr(m) { const e=document.getElementById('err'); e.textContent=m; e.classList.add('show'); }
+function hideErr() { const e=document.getElementById('err'); if(e) e.classList.remove('show'); }
+
+function goNext() {
+  const q = QS[cur];
+  if (q.type === 'open') {
+    if (!q.optional && (!ans[q.id] || !ans[q.id].trim())) { showErr('Molimo popuni ovo polje.'); return; }
+  } else {
+    const sel = ans[q.id] || [];
+    if (sel.length === 0) { showErr('Molimo izaberi bar jedan odgovor pre nego što nastaviš.'); return; }
+    if (q.type === 'correct' && sel.length !== q.n) { showErr(`Potrebno je izabrati tačno ${q.n} odgovora. Trenutno si izabrao/la ${sel.length}.`); return; }
+  }
+  cur++; render(); window.scrollTo({top:0,behavior:'smooth'});
 }
+
+function goBack() { if(cur > 0) { cur--; render(); window.scrollTo({top:0,behavior:'smooth'}); } }
 
 function renderDone(app) {
-  const summaryRows = QUESTIONS.map(q => {
-    const sel = answers[q.id] || [];
-    const chosen = sel.map(i => q.opts[i]).join(', ');
-    return `
-      <div class="sum-row">
-        <div class="sum-q">${q.id}. ${truncate(q.text, 60)}</div>
-        <div class="sum-a">${chosen || '—'}</div>
-      </div>
-    `;
+  const rows = QS.map(q => {
+    let txt='—', cls='';
+    if (q.type==='open') {
+      txt = (ans[q.id]&&ans[q.id].trim()) ? `"${ans[q.id].trim()}"` : '(nije upisano)';
+      cls = (ans[q.id]&&ans[q.id].trim()) ? 'open-ans' : '';
+    } else {
+      const sel = ans[q.id] || [];
+      txt = sel.map(i=>q.opts[i]).join(', ') || '—';
+      if (q.type==='avoid') cls = 'avoid';
+    }
+    return `<div class="sum-row"><div class="sum-q">${q.id}. ${q.text.length>65?q.text.substring(0,65)+'…':q.text}</div><div class="sum-a ${cls}">${txt}</div></div>`;
   }).join('');
 
   app.innerHTML = `
     <div class="done-screen">
-      <div class="done-icon-wrap">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <path d="M5 14l6 6L23 8" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <div class="done-icon-wrap"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 14l6 6L23 8" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="done-title">Hvala na odgovorima!</div>
-      <div class="done-sub">
-        Tvoji odgovori pomažu nam da dizajniramo aplikaciju koja odgovara stvarnim potrebama korisnika.<br>
-        Rezultati ankete biće korišćeni u specifikaciji projekta.
-      </div>
-
-      <div class="summary-title">Tvoji odgovori</div>
-      <div class="summary-list">${summaryRows}</div>
-
-      <button class="btn-restart" onclick="restart()">
-        Popuni anketu ponovo
-      </button>
-    </div>
-  `;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+      <div class="done-sub">Tvoji odgovori pomažu nam da dizajniramo aplikaciju koja odgovara stvarnim potrebama korisnika. Rezultati će biti korišćeni u specifikaciji projekta.</div>
+      <div class="sum-label">Pregled tvojih odgovora</div>
+      <div class="summary-list">${rows}</div>
+      <button class="btn-restart" onclick="restart()">↺ Popuni anketu ponovo</button>
+    </div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function restart() {
-  current = 0;
-  Object.keys(answers).forEach(k => delete answers[k]);
-  render();
-}
+function restart() { cur=-1; Object.keys(ans).forEach(k=>delete ans[k]); render(); }
 
 render();
 </script>
