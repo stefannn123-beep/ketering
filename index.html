@@ -3,623 +3,609 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finesa Ketering — Naručivanje</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<title>Anketa — Aplikacija za ketering</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --cream:#FAF8F3;--gold:#C9A84C;--gold-light:#EDD98A;--gold-dark:#8B6914;
-  --brown:#3D2B1F;--brown-light:#6B4A35;--text:#2C1A0E;--text-muted:#8A7060;
-  --border:#E8DDD0;--white:#FFFFFF;--red:#C0392B;--green:#1A7A4A;
-  --surface:#F4EFE6;
-}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-nav{background:var(--brown);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
-.nav-logo{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-light);letter-spacing:1px;line-height:1.1}
-.nav-logo span{color:rgba(255,255,255,0.55);font-weight:300;font-size:12px;display:block;letter-spacing:3px;text-transform:uppercase}
-.nav-actions{display:flex;align-items:center;gap:.75rem}
-.nav-btn{background:none;border:1px solid rgba(255,255,255,0.25);color:#fff;padding:6px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:6px}
-.nav-btn:hover{background:rgba(255,255,255,0.1)}
-.cart-btn{background:var(--gold);border-color:var(--gold);color:var(--brown);font-weight:500}
-.cart-btn:hover{background:var(--gold-light)}
-.cart-count{background:var(--brown);color:var(--gold-light);border-radius:50%;width:18px;height:18px;font-size:11px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+  :root {
+    --bg: #F7F5F2;
+    --white: #FFFFFF;
+    --brand: #2D5BE3;
+    --brand-light: #EEF2FD;
+    --brand-dark: #1A3FA8;
+    --text: #1A1A2E;
+    --text-muted: #6B7280;
+    --text-hint: #9CA3AF;
+    --border: #E5E7EB;
+    --border-hover: #D1D5DB;
+    --success: #10B981;
+    --success-light: #ECFDF5;
+    --danger: #EF4444;
+    --danger-light: #FEF2F2;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
 
-.hero{background:var(--brown);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(201,168,76,0.06) 0%, transparent 40%)}
-.hero h1{font-family:'Playfair Display',serif;font-size:52px;color:#fff;font-weight:400;position:relative;line-height:1.15;margin-bottom:1rem}
-.hero h1 em{color:var(--gold-light);font-style:italic}
-.hero p{color:rgba(255,255,255,0.65);font-size:16px;margin-bottom:2rem;position:relative;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7}
-.hero-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;position:relative}
-.tag{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.35);color:var(--gold-light);padding:5px 14px;border-radius:20px;font-size:12px;letter-spacing:.4px}
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-.filters{background:var(--white);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;gap:8px;overflow-x:auto;align-items:center;position:sticky;top:64px;z-index:90}
-.filter-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:4px}
-.filter-btn{background:none;border:1px solid var(--border);color:var(--text-muted);padding:6px 18px;border-radius:20px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .2s}
-.filter-btn.active,.filter-btn:hover{background:var(--brown);border-color:var(--brown);color:#fff}
+  /* HEADER */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .logo {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-dot {
+    width: 8px; height: 8px;
+    background: var(--brand);
+    border-radius: 50%;
+  }
+  .header-badge {
+    font-size: 12px;
+    background: var(--brand-light);
+    color: var(--brand);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
 
-main{max-width:1100px;margin:0 auto;padding:2.5rem 2rem}
-.section-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--brown);margin-bottom:1.5rem}
-.section-title span{color:var(--gold-dark);font-style:italic}
+  /* MAIN */
+  main {
+    flex: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    width: 100%;
+  }
 
-.packages-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-bottom:3rem}
-.pkg-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer}
-.pkg-card:hover{box-shadow:0 8px 32px rgba(44,26,14,0.1);transform:translateY(-3px)}
-.pkg-card.selected{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.2)}
-.pkg-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative}
-.pkg-badge{position:absolute;top:12px;right:12px;background:var(--brown);color:var(--gold-light);font-size:11px;padding:3px 10px;border-radius:10px;letter-spacing:.4px}
-.pkg-badge.popular{background:var(--gold);color:var(--brown);font-weight:500}
-.pkg-body{padding:1.25rem}
-.pkg-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--brown);margin-bottom:4px}
-.pkg-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:1rem}
-.pkg-includes{margin-bottom:1rem;list-style:none}
-.pkg-includes li{font-size:12px;color:var(--text-muted);padding:2px 0;display:flex;align-items:center;gap:6px}
-.pkg-includes li::before{content:'✓';color:var(--gold-dark);font-weight:700;font-size:11px}
-.pkg-meta{display:flex;align-items:center;justify-content:space-between}
-.pkg-price{font-size:20px;font-weight:500;color:var(--brown)}
-.pkg-price small{font-size:12px;color:var(--text-muted);font-weight:400}
-.pkg-add-btn{background:var(--brown);color:#fff;border:none;padding:8px 18px;border-radius:20px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;transition:all .2s}
-.pkg-add-btn:hover{background:var(--gold-dark)}
-.pkg-add-btn.in-cart{background:var(--green)}
+  /* PROGRESS */
+  .progress-wrap { margin-bottom: 2rem; }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .progress-meta span {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .progress-meta strong {
+    font-size: 13px;
+    color: var(--brand);
+    font-weight: 600;
+  }
+  .progress-track {
+    height: 5px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--brand);
+    border-radius: 3px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-.divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
+  /* QUESTION CARD */
+  .q-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    animation: slideIn 0.25s ease;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .q-eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--brand);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .q-text {
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .multi-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  .multi-hint svg { flex-shrink: 0; }
 
-.persons-row{display:flex;align-items:center;gap:1.25rem;margin:1.5rem 0 2.5rem}
-.persons-label{font-size:14px;color:var(--text-muted)}
-.qty-btn{width:38px;height:38px;border:1.5px solid var(--border);background:var(--white);border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:'DM Sans',sans-serif;color:var(--brown)}
-.qty-btn:hover{border-color:var(--gold);background:var(--surface)}
-.qty-display{font-size:26px;font-weight:500;color:var(--brown);min-width:48px;text-align:center;font-family:'Playfair Display',serif}
+  /* OPTIONS */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    background: var(--white);
+    user-select: none;
+  }
+  .opt:hover { border-color: var(--border-hover); background: #FAFAFA; }
+  .opt.selected {
+    border-color: var(--brand);
+    background: var(--brand-light);
+  }
+  .opt-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    background: var(--white);
+  }
+  .opt.selected .opt-indicator {
+    background: var(--brand);
+    border-color: var(--brand);
+  }
+  .opt-tick {
+    width: 9px; height: 9px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .opt.selected .opt-tick { opacity: 1; }
+  .opt-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .opt.selected .opt-text { color: var(--brand-dark); font-weight: 500; }
 
-.addons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem;margin-bottom:2rem}
-.addon-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:1rem;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s}
-.addon-card:hover,.addon-card.selected{border-color:var(--gold);background:var(--surface)}
-.addon-icon{font-size:28px;width:46px;height:46px;background:var(--surface);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.addon-info{flex:1}
-.addon-name{font-size:13px;font-weight:500;color:var(--brown);margin-bottom:2px}
-.addon-price{font-size:12px;color:var(--gold-dark);font-weight:500}
-.addon-check{width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;flex-shrink:0;transition:all .2s}
-.addon-card.selected .addon-check{background:var(--gold);border-color:var(--gold);color:var(--brown)}
+  /* ERROR */
+  .err-msg {
+    font-size: 12px;
+    color: var(--danger);
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--danger-light);
+    border-radius: 6px;
+    display: none;
+  }
+  .err-msg.show { display: block; }
 
-/* CART */
-.cart-scrim{position:fixed;inset:0;background:rgba(44,26,14,0.45);z-index:199;opacity:0;pointer-events:none;transition:opacity .35s}
-.cart-scrim.open{opacity:1;pointer-events:all}
-.cart-overlay{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:100vw;background:var(--white);box-shadow:-8px 0 48px rgba(44,26,14,0.18);z-index:200;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
-.cart-overlay.open{transform:translateX(0)}
-.cart-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.cart-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown)}
-.cart-close{background:none;border:none;cursor:pointer;font-size:24px;color:var(--text-muted);line-height:1;padding:4px}
-.cart-items{flex:1;overflow-y:auto;padding:1rem 1.5rem}
-.cart-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted);font-size:14px;line-height:2}
-.cart-empty span{font-size:48px;display:block;margin-bottom:.75rem;opacity:.4}
-.cart-item{display:flex;justify-content:space-between;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border)}
-.cart-item:last-child{border-bottom:none}
-.cart-item-name{font-size:14px;font-weight:500;color:var(--brown);margin-bottom:3px}
-.cart-item-sub{font-size:12px;color:var(--text-muted)}
-.cart-item-right{display:flex;align-items:center;gap:10px}
-.cart-item-price{font-size:14px;font-weight:500;color:var(--brown);white-space:nowrap}
-.cart-item-remove{background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;padding:0 4px;transition:color .2s;line-height:1}
-.cart-item-remove:hover{color:var(--red)}
-.cart-footer{padding:1.5rem;border-top:1px solid var(--border)}
-.cart-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem}
-.cart-total-label{font-size:14px;color:var(--text-muted)}
-.cart-total-val{font-size:24px;font-weight:500;color:var(--brown);font-family:'Playfair Display',serif}
-.checkout-btn{width:100%;background:var(--brown);color:#fff;border:none;padding:15px;border-radius:10px;font-size:15px;font-family:'DM Sans',sans-serif;cursor:pointer;font-weight:500;transition:background .2s;letter-spacing:.3px}
-.checkout-btn:hover{background:var(--gold-dark)}
+  /* NAV */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .btn-secondary {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+  }
+  .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
+  .btn-primary {
+    background: var(--brand);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--brand-dark); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* MODALS */
-.modal-bg{position:fixed;inset:0;background:rgba(44,26,14,0.55);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem}
-.modal-bg.open{display:flex}
-.modal{background:var(--white);border-radius:20px;padding:2rem;max-width:560px;width:100%;max-height:92vh;overflow-y:auto}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
-.modal-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown)}
-.modal-close{background:none;border:none;cursor:pointer;font-size:24px;color:var(--text-muted);padding:4px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.form-group{margin-bottom:1.25rem}
-.form-label{display:block;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;font-weight:500}
-.form-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);transition:border-color .2s;outline:none}
-.form-input:focus{border-color:var(--gold)}
-.form-input.error{border-color:var(--red)}
-.form-error{font-size:11px;color:var(--red);margin-top:4px;min-height:16px}
-.payment-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.payment-opt{border:1.5px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;text-align:center;transition:all .2s;font-size:13px;color:var(--text-muted);font-family:'DM Sans',sans-serif;background:none}
-.payment-opt:hover,.payment-opt.active{border-color:var(--gold);background:var(--surface);color:var(--brown)}
-.pay-icon{font-size:24px;display:block;margin-bottom:4px}
-.order-summary{background:var(--surface);border-radius:12px;padding:1rem 1.25rem;margin:1rem 0}
-.order-row{display:flex;justify-content:space-between;font-size:13px;padding:3px 0;color:var(--text-muted)}
-.order-row.total{border-top:1px solid var(--border);margin-top:8px;padding-top:10px}
-.order-row.total span:first-child{font-weight:500;color:var(--brown);font-size:14px}
-.order-row.total span:last-child{font-size:20px;font-weight:500;color:var(--brown);font-family:'Playfair Display',serif}
-.modal-actions{display:flex;gap:10px;margin-top:1.5rem}
-.btn-cancel{flex:1;background:none;border:1.5px solid var(--border);color:var(--text-muted);padding:13px;border-radius:8px;cursor:pointer;font-size:14px;font-family:'DM Sans',sans-serif;transition:all .2s}
-.btn-cancel:hover{border-color:var(--text-muted);color:var(--text)}
-.btn-confirm{flex:2;background:var(--brown);color:#fff;border:none;padding:13px;border-radius:8px;cursor:pointer;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;transition:background .2s}
-.btn-confirm:hover{background:var(--gold-dark)}
-.pay-error{background:#FEF2F2;border:1px solid #F7C1C1;border-radius:8px;padding:10px 14px;font-size:13px;color:#A32D2D;margin-top:1rem;display:none}
-.pay-error strong{display:block;margin-bottom:2px}
+  /* DONE SCREEN */
+  .done-screen {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    animation: slideIn 0.3s ease;
+  }
+  .done-icon-wrap {
+    width: 64px; height: 64px;
+    background: var(--success-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+  }
+  .done-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--text);
+    margin-bottom: .5rem;
+  }
+  .done-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .summary-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-hint);
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  .summary-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem; }
+  .sum-row {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .sum-q { font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
+  .sum-a { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.5; }
+  .btn-restart {
+    background: var(--text);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-restart:hover { opacity: 0.85; }
 
-/* SUCCESS */
-.success-wrap{text-align:center;padding:2rem 1rem}
-.success-icon{font-size:72px;display:block;margin-bottom:1rem;animation:pop .5s cubic-bezier(.175,.885,.32,1.275)}
-@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
-.success-title{font-family:'Playfair Display',serif;font-size:30px;color:var(--brown);margin-bottom:.5rem}
-.success-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem}
-.success-sub strong{color:var(--gold-dark);font-size:15px}
-.success-details{background:var(--surface);border-radius:12px;padding:1.25rem;text-align:left;margin-bottom:1.5rem}
-.srow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:var(--text-muted)}
-.srow strong{color:var(--brown)}
-.success-note{font-size:13px;color:var(--text-muted);line-height:1.8}
-.success-note i{margin-right:6px;vertical-align:-1px}
-.btn-new{background:var(--brown);color:#fff;border:none;padding:13px 2rem;border-radius:8px;cursor:pointer;font-size:14px;font-family:'DM Sans',sans-serif;margin-top:1.5rem;transition:background .2s}
-.btn-new:hover{background:var(--gold-dark)}
-
-/* LOGIN */
-.tabs{display:flex;margin-bottom:1.5rem;border-bottom:1px solid var(--border)}
-.tab{flex:1;padding:10px;background:none;border:none;cursor:pointer;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
-.tab.active{color:var(--brown);border-bottom-color:var(--gold);font-weight:500}
-
-/* TOAST */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(16px);background:var(--brown);color:#fff;padding:10px 24px;border-radius:30px;font-size:14px;opacity:0;pointer-events:none;transition:all .3s;z-index:999;white-space:nowrap;box-shadow:0 4px 20px rgba(44,26,14,0.3)}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* Session timeout banner */
-.session-banner{display:none;position:fixed;top:64px;left:0;right:0;background:#C0392B;color:#fff;text-align:center;padding:10px;font-size:13px;z-index:150}
-.session-banner.show{display:block}
-
-@media(max-width:640px){
-  .hero h1{font-size:34px}
-  .packages-grid{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .cart-overlay{width:100vw}
-}
+  @media (max-width: 500px) {
+    main { padding: 1.5rem 1rem; }
+    .q-card { padding: 1.5rem; }
+    .q-text { font-size: 17px; }
+    header { padding: 0 1rem; }
+  }
 </style>
 </head>
 <body>
 
-<!-- SESSION BANNER -->
-<div class="session-banner" id="sessionBanner">
-  ⏱ Sesija je istekla zbog neaktivnosti. <a href="#" style="color:#EDD98A;margin-left:8px" onclick="openLogin();hideBanner()">Prijavite se ponovo</a>
-</div>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    Finesa Ketering
-    <span>Beograd &amp; okolina</span>
+<header>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    Istraživanje korisnika
   </div>
-  <div class="nav-actions">
-    <button class="nav-btn" id="loginNavBtn" onclick="openLogin()">
-      <i class="ti ti-user" style="font-size:14px"></i>
-      Prijava
-    </button>
-    <button class="nav-btn cart-btn" onclick="toggleCart()">
-      <i class="ti ti-shopping-bag" style="font-size:14px"></i>
-      Korpa
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-  </div>
-</nav>
+  <div class="header-badge">Projekat SI3PSI</div>
+</header>
 
-<!-- HERO -->
-<div class="hero">
-  <h1>Savršen ketering za<br><em>svaku priliku</em></h1>
-  <p>Proslava, poslovni događaj ili intimna večera — naša ponuda prilagođava se vašim željama.</p>
-  <div class="hero-tags">
-    <span class="tag">🎂 Proslave</span>
-    <span class="tag">💼 Korporativno</span>
-    <span class="tag">💒 Svadbe</span>
-    <span class="tag">🚚 Dostava uključena</span>
-    <span class="tag">👨‍🍳 Konobar u službi</span>
-    <span class="tag">🕐 Narudžba 24/7</span>
-  </div>
-</div>
-
-<!-- FILTERS -->
-<div class="filters">
-  <span class="filter-label">Kategorija:</span>
-  <button class="filter-btn active" onclick="filterBy(this,'svi')">Svi paketi</button>
-  <button class="filter-btn" onclick="filterBy(this,'rodjendani')">🎂 Rođendani</button>
-  <button class="filter-btn" onclick="filterBy(this,'poslovni')">💼 Poslovni</button>
-  <button class="filter-btn" onclick="filterBy(this,'svadba')">💒 Svadbe</button>
-  <button class="filter-btn" onclick="filterBy(this,'koktel')">🥂 Koktel</button>
-</div>
-
-<!-- MAIN -->
-<main>
-  <div class="section-title">Dostupni <span>paketi</span></div>
-  <div class="packages-grid" id="packagesGrid"></div>
-
-  <hr class="divider">
-
-  <div class="section-title">Broj <span>osoba</span></div>
-  <div class="persons-row">
-    <span class="persons-label">Broj gostiju:</span>
-    <button class="qty-btn" onclick="changePersons(-5)">−</button>
-    <span class="qty-display" id="personsDisplay">20</span>
-    <button class="qty-btn" onclick="changePersons(5)">+</button>
-    <span class="persons-label" style="color:var(--gold-dark);font-size:12px">Min. 10 · Maks. 500</span>
-  </div>
-
-  <hr class="divider">
-
-  <div class="section-title">Dodatne <span>usluge</span></div>
-  <div class="addons-grid" id="addonsGrid"></div>
-</main>
-
-<!-- CART SCRIM -->
-<div class="cart-scrim" id="cartScrim" onclick="toggleCart()"></div>
-
-<!-- CART PANEL -->
-<div class="cart-overlay" id="cartPanel">
-  <div class="cart-header">
-    <span class="cart-title">Vaša korpa</span>
-    <button class="cart-close" onclick="toggleCart()">×</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty"><span>🧺</span>Korpa je prazna.<br>Dodajte pakete ili usluge.</div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total-row">
-      <span class="cart-total-label">Ukupno</span>
-      <span class="cart-total-val" id="cartTotal">0 RSD</span>
-    </div>
-    <button class="checkout-btn" onclick="openCheckout()">Nastavi na plaćanje →</button>
-  </div>
-</div>
-
-<!-- CHECKOUT MODAL -->
-<div class="modal-bg" id="checkoutModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Detalji narudžbine</div>
-      <button class="modal-close" onclick="closeCheckout()">×</button>
-    </div>
-    <div id="checkoutFormWrap">
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label">Ime i prezime *</label>
-          <input class="form-input" id="fName" type="text" placeholder="Petar Petrović">
-          <div class="form-error" id="errName"></div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Broj telefona *</label>
-          <input class="form-input" id="fPhone" type="tel" placeholder="06X XXX XXXX">
-          <div class="form-error" id="errPhone"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email adresa</label>
-        <input class="form-input" id="fEmail" type="email" placeholder="petar@email.com">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Adresa isporuke *</label>
-        <input class="form-input" id="fAddress" type="text" placeholder="Ulica i broj, grad">
-        <div class="form-error" id="errAddress"></div>
-      </div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label">Datum događaja *</label>
-          <input class="form-input" id="fDate" type="date">
-          <div class="form-error" id="errDate"></div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Vreme *</label>
-          <input class="form-input" id="fTime" type="time" value="13:00">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Napomena (alergije, posebni zahtevi…)</label>
-        <input class="form-input" id="fNote" type="text" placeholder="Opcionalno">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Način plaćanja *</label>
-        <div class="payment-opts">
-          <button class="payment-opt active" onclick="setPayment('gotovina',this)">
-            <span class="pay-icon">💵</span>Gotovina pri isporuci
-          </button>
-          <button class="payment-opt" onclick="setPayment('kartica',this)">
-            <span class="pay-icon">💳</span>Online karticom
-          </button>
-        </div>
-      </div>
-      <div class="order-summary" id="orderSummary"></div>
-      <div class="pay-error" id="payError">
-        <strong>Plaćanje nije uspelo.</strong>
-        Kartica je odbijena. Pokušajte ponovo ili izaberite drugi način plaćanja.
-      </div>
-      <div class="modal-actions">
-        <button class="btn-cancel" onclick="closeCheckout()">Odustani</button>
-        <button class="btn-confirm" onclick="confirmOrder()">Potvrdi narudžbinu</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SUCCESS MODAL -->
-<div class="modal-bg" id="successModal">
-  <div class="modal" style="max-width:500px">
-    <div class="success-wrap">
-      <span class="success-icon">🎉</span>
-      <div class="success-title">Narudžbina primljena!</div>
-      <div class="success-sub">ID narudžbine: <strong id="orderId">—</strong></div>
-      <div class="success-details" id="successDetails"></div>
-      <div class="success-note">
-        <i class="ti ti-mail" style="color:var(--gold-dark)"></i>Potvrda je poslata na vašu email adresu.<br>
-        <i class="ti ti-bell" style="color:var(--gold-dark)"></i>Administrator će vas kontaktirati u roku od 30 minuta.
-      </div>
-      <button class="btn-new" onclick="resetApp()">Nova narudžbina</button>
-    </div>
-  </div>
-</div>
-
-<!-- LOGIN MODAL -->
-<div class="modal-bg" id="loginModal">
-  <div class="modal" style="max-width:420px">
-    <div class="modal-header">
-      <div class="modal-title">Dobrodošli</div>
-      <button class="modal-close" onclick="closeLogin()">×</button>
-    </div>
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab(this,'login')">Prijava</button>
-      <button class="tab" onclick="switchTab(this,'register')">Registracija</button>
-    </div>
-    <div id="loginPane">
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="loginEmail" type="email" placeholder="email@primer.com"></div>
-      <div class="form-group"><label class="form-label">Lozinka</label><input class="form-input" id="loginPass" type="password" placeholder="••••••••"></div>
-      <button class="btn-confirm" style="width:100%;margin-top:.5rem" onclick="simulateLogin()">Prijavi se</button>
-      <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:1rem">Demo: bilo koji email i lozinka</p>
-    </div>
-    <div id="registerPane" style="display:none">
-      <div class="form-group"><label class="form-label">Ime i prezime</label><input class="form-input" type="text" placeholder="Ime Prezime"></div>
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="email@primer.com"></div>
-      <div class="form-group"><label class="form-label">Lozinka</label><input class="form-input" type="password" placeholder="Najmanje 8 karaktera"></div>
-      <button class="btn-confirm" style="width:100%;margin-top:.5rem" onclick="simulateRegister()">Registruj se</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<main id="app"></main>
 
 <script>
-const PACKAGES = [
-  {id:1,name:'Klasična proslava',cat:'rodjendani',emoji:'🎂',price:1800,desc:'Idealan za rođendane i porodične proslave. Raznovrstan meni za sve ukuse.',includes:['Topla predjela i supe','Glavna jela (3 vrste)','Salate i prilozi','Torta po izboru'],badge:'',bg:'#FFF8EE'},
-  {id:2,name:'Business paket',cat:'poslovni',emoji:'💼',price:2200,desc:'Profesionalna prezentacija za skupove, konferencije i poslovne prezentacije.',includes:['Finger food i kanapei','Sveži sokovi i kafa','Slatki sto','Usluga konobara'],badge:'popular',bg:'#F0F4FF'},
-  {id:3,name:'Premium svadba',cat:'svadba',emoji:'💒',price:4500,desc:'Luksuzni meni za nezaboravan dan. Prilagođen svakom stilu i prostoru.',includes:['5-hodni degustacioni meni','Otvoreni bar (5h)','Dekoracija stola','Majstor ceremonijala'],badge:'premium',bg:'#FFF0F5'},
-  {id:4,name:'Koktel zurka',cat:'koktel',emoji:'🥂',price:1400,desc:'Lagani finger food i pića za stylish koktele, vernisaže i neformalne skupove.',includes:['Finger food (8 vrsta)','Bezalkoholna i alkoholna pića','Dekorativno posluživanje','DJ muzika'],badge:'',bg:'#F0FFF8'},
-  {id:5,name:'Dečji paket',cat:'rodjendani',emoji:'🎈',price:1200,desc:'Zabavni meni za najmlađe. Sigurni sastojci, šarena i vesela prezentacija.',includes:['Sendviči i mini pizza','Voće i desert bar','Sok i limunade','Animatorski sto'],badge:'',bg:'#FFFFF0'},
-  {id:6,name:'Team building',cat:'poslovni',emoji:'🏆',price:2800,desc:'Kreativni meni za neformalna korporativna dešavanja i team building aktivnosti.',includes:['BBQ stanica','Live kuvanje','Craft piva i kokteli','Tematski dekor'],badge:'',bg:'#F5F0FF'},
+const QUESTIONS = [
+  {
+    id: 1,
+    text: "Kako bi najradije koristio/la aplikaciju za naručivanje keteringa?",
+    multi: false,
+    opts: [
+      "Mobilni telefon (Android ili iOS)",
+      "Web pretraživač na računaru ili laptopu",
+      "Tablet uređaj",
+      "Podjednako mi odgovara na svim uređajima"
+    ]
+  },
+  {
+    id: 2,
+    text: "Koji vizuelni stil aplikacije ti se najviše sviđa?",
+    multi: false,
+    opts: [
+      "Minimalistički i čist — svetle boje, puno belog prostora",
+      "Topao i elegantan — tamne boje, zlatni i braon detalji",
+      "Živopisan i veseo — jarke boje, ilustracije, ikonice",
+      "Profesionalni i neutralni — sivi tonovi, poslovni izgled"
+    ]
+  },
+  {
+    id: 3,
+    text: "Šta ti je najvažnije kada biraš ketering paket? (možeš izabrati više)",
+    multi: true,
+    opts: [
+      "Cena po osobi i ukupni trošak",
+      "Kvalitetne fotografije jela i prezentacije",
+      "Opis sastojaka, alergena i nutritivnih vrednosti",
+      "Ocene i recenzije prethodnih korisnika",
+      "Dostupnost na željeni datum i vreme",
+      "Brzina dostave i pouzdanost"
+    ]
+  },
+  {
+    id: 4,
+    text: "Kako bi voleo/la da se ketering paketi prikazuju na ekranu?",
+    multi: false,
+    opts: [
+      "Kartice u mrežnom rasporedu (grid sa slikama)",
+      "Lista sa detaljnim opisima i cenama",
+      "Klizač sa velikim fotografijama (carousel)",
+      "Tabela sa poređenjem paketa i opcija"
+    ]
+  },
+  {
+    id: 5,
+    text: "Koji način filtriranja i pretrage ponude ti je najkorisniji?",
+    multi: false,
+    opts: [
+      "Po tipu događaja — rođendan, svadba, poslovni skup…",
+      "Po cenovnom rangu — od najjeftinije do najskuplje",
+      "Po broju osoba na događaju",
+      "Po oceni, popularnosti i broju narudžbina"
+    ]
+  },
+  {
+    id: 6,
+    text: "Kako bi voleo/la da izgleda sam proces naručivanja?",
+    multi: false,
+    opts: [
+      "Sve na jednoj dugačkoj stranici (scroll kroz korake)",
+      "Čarobnjak korak-po-korak sa jasno vidljivim napretkom",
+      "Brza narudžbina — minimum klikova, bez registracije",
+      "Interaktivni razgovor sa virtuelnim asistentom (chatbot)"
+    ]
+  },
+  {
+    id: 7,
+    text: "Koji način plaćanja ti je važan da bude podržan? (možeš izabrati više)",
+    multi: true,
+    opts: [
+      "Gotovina pri isporuci ili preuzimanju",
+      "Online plaćanje karticom (Visa, Mastercard)",
+      "PayPal ili digitalni novčanici",
+      "Lojalni program — popusti za stalne korisnike",
+      "Faktura za pravna lica i firme"
+    ]
+  },
+  {
+    id: 8,
+    text: "Šta bi te najviše motivisalo da kreiraš korisnički nalog u aplikaciji?",
+    multi: false,
+    opts: [
+      "Praćenje istorije i ponovljeno naručivanje omiljenog",
+      "Personalizovane preporuke na osnovu prethodnih izbora",
+      "Ekskluzivni popusti i akcije za registrovane korisnike",
+      "Brže naručivanje bez ponovnog unosa podataka",
+      "Ne bi me ništa motivisalo — gostujuća narudžbina mi je dovoljna"
+    ]
+  },
+  {
+    id: 9,
+    text: "Koje dodatne funkcionalnosti bi voleo/la da postoje u aplikaciji? (možeš izabrati više)",
+    multi: true,
+    opts: [
+      "Kalkulator ukupne cene koji se ažurira u realnom vremenu",
+      "Mapa sa praćenjem dostave uživo",
+      "Ocenjivanje i pisanje recenzije posle svake narudžbine",
+      "Zakazivanje ketering usluge daleko unapred (do 30 dana)",
+      "Push notifikacije o statusu narudžbine",
+      "Podrška u četu uživo sa operaterom"
+    ]
+  },
+  {
+    id: 10,
+    text: "Koliko ti je bitno da aplikacija radi brzo i bez kašnjenja?",
+    multi: false,
+    opts: [
+      "Izuzetno bitno — ne prihvatam čekanje duže od 1 sekunde",
+      "Bitno — prihvatam učitavanje do 3 sekunde",
+      "Umereno — do 5 sekundi je ok ako je sadržaj kvalitetan",
+      "Nije mi prioritet, bitno mi je da aplikacija bude funkcionalna"
+    ]
+  }
 ];
 
-const ADDONS = [
-  {id:'a1',name:'Konobar (8h)',emoji:'👨‍🍳',price:8000},
-  {id:'a2',name:'Dostava i montaža',emoji:'🚚',price:3500},
-  {id:'a3',name:'Dekoracija stola',emoji:'💐',price:5000},
-  {id:'a4',name:'Foto-ugao',emoji:'📸',price:6000},
-  {id:'a5',name:'Glazbeni nastup',emoji:'🎵',price:15000},
-  {id:'a6',name:'Torta po meri',emoji:'🎂',price:7000},
-  {id:'a7',name:'Vegan opcija',emoji:'🥗',price:1500},
-  {id:'a8',name:'Degustacioni bar',emoji:'🍷',price:9000},
-];
+let current = 0;
+const answers = {};
 
-let cart=[], persons=20, selectedAddons=new Set(), currentFilter='svi', payMethod='gotovina';
-let sessionTimer, loggedIn=false;
+function pct() {
+  return Math.round((current / QUESTIONS.length) * 100);
+}
 
-function fmt(n){return n.toLocaleString('sr-RS')+' RSD';}
+function truncate(str, n) {
+  return str.length > n ? str.substring(0, n) + '…' : str;
+}
 
-function renderPackages(){
-  const filtered=currentFilter==='svi'?PACKAGES:PACKAGES.filter(p=>p.cat===currentFilter);
-  document.getElementById('packagesGrid').innerHTML=filtered.map(p=>`
-    <div class="pkg-card${cart.some(c=>c.type==='pkg'&&c.id===p.id)?' selected':''}" id="pkg${p.id}" onclick="togglePackage(${p.id})">
-      <div class="pkg-img" style="background:${p.bg}">
-        <span>${p.emoji}</span>
-        ${p.badge?`<div class="pkg-badge ${p.badge}">${p.badge==='popular'?'⭐ Popularno':'✨ Premium'}</div>`:''}
+function render() {
+  const app = document.getElementById('app');
+  if (current >= QUESTIONS.length) {
+    renderDone(app);
+    return;
+  }
+  const q = QUESTIONS[current];
+  const sel = answers[q.id] || [];
+
+  app.innerHTML = `
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span>Napredak</span>
+        <strong>${pct()}% završeno</strong>
       </div>
-      <div class="pkg-body">
-        <div class="pkg-name">${p.name}</div>
-        <div class="pkg-desc">${p.desc}</div>
-        <ul class="pkg-includes">${p.includes.map(i=>`<li>${i}</li>`).join('')}</ul>
-        <div class="pkg-meta">
-          <div class="pkg-price">${p.price.toLocaleString('sr-RS')} <small>RSD/os.</small></div>
-          <button class="pkg-add-btn${cart.some(c=>c.type==='pkg'&&c.id===p.id)?' in-cart':''}" id="pkgBtn${p.id}">
-            ${cart.some(c=>c.type==='pkg'&&c.id===p.id)?'✓ U korpi':'Dodaj'}
-          </button>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: ${pct()}%"></div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-eyebrow">Pitanje ${current + 1} od ${QUESTIONS.length}</div>
+      <div class="q-text">${q.text}</div>
+      ${q.multi ? `
+        <div class="multi-hint">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="7" stroke="#6B7280" stroke-width="1.5"/>
+            <path d="M8 7v4M8 5v.5" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Možeš izabrati više odgovora
         </div>
+      ` : ''}
+      <div class="options">
+        ${q.opts.map((o, i) => `
+          <div class="opt${sel.includes(i) ? ' selected' : ''}" onclick="pick(${q.id}, ${i}, ${q.multi})">
+            <div class="opt-indicator">
+              <svg class="opt-tick" viewBox="0 0 10 10">
+                <polyline points="1.5,5 4,7.5 8.5,2.5"/>
+              </svg>
+            </div>
+            <span class="opt-text">${o}</span>
+          </div>
+        `).join('')}
       </div>
+      <div class="err-msg" id="errMsg">Molimo izaberi bar jedan odgovor pre nego što nastaviš.</div>
     </div>
-  `).join('');
-}
 
-function renderAddons(){
-  document.getElementById('addonsGrid').innerHTML=ADDONS.map(a=>`
-    <div class="addon-card${selectedAddons.has(a.id)?' selected':''}" onclick="toggleAddon('${a.id}')">
-      <div class="addon-icon">${a.emoji}</div>
-      <div class="addon-info">
-        <div class="addon-name">${a.name}</div>
-        <div class="addon-price">+${a.price.toLocaleString('sr-RS')} RSD</div>
-      </div>
-      <div class="addon-check">${selectedAddons.has(a.id)?'✓':''}</div>
-    </div>
-  `).join('');
-}
-
-function togglePackage(id){
-  resetSessionTimer();
-  const pkg=PACKAGES.find(p=>p.id===id);
-  const idx=cart.findIndex(c=>c.type==='pkg'&&c.id===id);
-  if(idx>-1){cart.splice(idx,1);toast(`"${pkg.name}" uklonjen iz korpe`);}
-  else{cart.push({type:'pkg',id,name:pkg.name,persons,pricePerPerson:pkg.price,total:pkg.price*persons});toast(`"${pkg.name}" dodat u korpu 🎉`);}
-  renderPackages();updateCart();
-}
-
-function toggleAddon(id){
-  resetSessionTimer();
-  const a=ADDONS.find(x=>x.id===id);
-  const idx=cart.findIndex(c=>c.type==='addon'&&c.id===id);
-  if(selectedAddons.has(id)){selectedAddons.delete(id);if(idx>-1)cart.splice(idx,1);toast(`"${a.name}" uklonjen`);}
-  else{selectedAddons.add(id);cart.push({type:'addon',id,name:a.name,price:a.price});toast(`"${a.name}" dodat ✓`);}
-  renderAddons();updateCart();
-}
-
-function changePersons(d){
-  resetSessionTimer();
-  persons=Math.max(10,Math.min(500,persons+d));
-  document.getElementById('personsDisplay').textContent=persons;
-  cart=cart.map(c=>c.type==='pkg'?{...c,persons,total:c.pricePerPerson*persons}:c);
-  updateCart();
-}
-
-function updateCart(){
-  const total=cart.reduce((s,c)=>s+(c.type==='pkg'?c.total:c.price),0);
-  document.getElementById('cartCount').textContent=cart.length;
-  document.getElementById('cartTotal').textContent=fmt(total);
-  const container=document.getElementById('cartItems');
-  if(!cart.length){container.innerHTML='<div class="cart-empty"><span>🧺</span>Korpa je prazna.<br>Dodajte pakete ili usluge.</div>';return;}
-  container.innerHTML=cart.map((c,i)=>`
-    <div class="cart-item">
+    <div class="nav-row">
       <div>
-        <div class="cart-item-name">${c.name}</div>
-        <div class="cart-item-sub">${c.type==='pkg'?`${c.persons} osoba × ${c.pricePerPerson.toLocaleString('sr-RS')} RSD`:'Dodatna usluga'}</div>
+        ${current > 0 ? `
+          <button class="btn btn-secondary" onclick="goBack()">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Nazad
+          </button>
+        ` : '<span></span>'}
       </div>
-      <div class="cart-item-right">
-        <div class="cart-item-price">${fmt(c.type==='pkg'?c.total:c.price)}</div>
-        <button class="cart-item-remove" onclick="removeItem(${i})">×</button>
-      </div>
+      <button class="btn btn-primary" onclick="goNext()">
+        ${current === QUESTIONS.length - 1 ? 'Završi anketu' : 'Sledeće pitanje'}
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
-  `).join('');
-}
-
-function removeItem(i){
-  const it=cart[i];
-  if(it.type==='addon')selectedAddons.delete(it.id);
-  cart.splice(i,1);
-  updateCart();renderPackages();renderAddons();
-  toast('Stavka uklonjena');
-}
-
-function filterBy(btn,cat){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');currentFilter=cat;renderPackages();
-}
-
-function toggleCart(){
-  document.getElementById('cartPanel').classList.toggle('open');
-  document.getElementById('cartScrim').classList.toggle('open');
-}
-
-function openCheckout(){
-  if(!cart.length){toast('Korpa je prazna!');return;}
-  if(document.getElementById('cartPanel').classList.contains('open'))toggleCart();
-  const total=cart.reduce((s,c)=>s+(c.type==='pkg'?c.total:c.price),0);
-  const d=new Date();d.setDate(d.getDate()+7);
-  document.getElementById('fDate').min=new Date().toISOString().split('T')[0];
-  document.getElementById('fDate').value=d.toISOString().split('T')[0];
-  const sumHtml=cart.map(c=>`<div class="order-row"><span>${c.name}${c.type==='pkg'?` (${c.persons} os.)`:''}</span><span>${fmt(c.type==='pkg'?c.total:c.price)}</span></div>`).join('')
-    +`<div class="order-row total"><span>Ukupno za plaćanje</span><span>${fmt(total)}</span></div>`;
-  document.getElementById('orderSummary').innerHTML=sumHtml;
-  document.getElementById('payError').style.display='none';
-  document.getElementById('checkoutModal').classList.add('open');
-}
-
-function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open');}
-
-function setPayment(m,btn){
-  payMethod=m;
-  document.querySelectorAll('.payment-opt').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function confirmOrder(){
-  const name=document.getElementById('fName').value.trim();
-  const phone=document.getElementById('fPhone').value.trim();
-  const address=document.getElementById('fAddress').value.trim();
-  const date=document.getElementById('fDate').value;
-  const time=document.getElementById('fTime').value;
-  const email=document.getElementById('fEmail').value.trim();
-  const note=document.getElementById('fNote').value.trim();
-  let ok=true;
-  [['errName','fName',name],['errPhone','fPhone',phone],['errAddress','fAddress',address],['errDate','fDate',date]].forEach(([e,f,v])=>{
-    document.getElementById(e).textContent=v?'':'Obavezno polje';
-    document.getElementById(f).classList.toggle('error',!v);
-    if(!v)ok=false;
-  });
-  if(!ok){toast('Sva obavezna polja moraju biti popunjena.');return;}
-  if(payMethod==='kartica'&&Math.random()<0.18){document.getElementById('payError').style.display='block';return;}
-  const id='FIN-'+Date.now().toString(36).toUpperCase();
-  const total=cart.reduce((s,c)=>s+(c.type==='pkg'?c.total:c.price),0);
-  document.getElementById('orderId').textContent=id;
-  document.getElementById('successDetails').innerHTML=`
-    <div class="srow"><span>Ime</span><strong>${name}</strong></div>
-    <div class="srow"><span>Telefon</span><strong>${phone}</strong></div>
-    ${email?`<div class="srow"><span>Email</span><strong>${email}</strong></div>`:''}
-    <div class="srow"><span>Adresa</span><strong>${address}</strong></div>
-    <div class="srow"><span>Datum</span><strong>${date} u ${time}</strong></div>
-    <div class="srow"><span>Plaćanje</span><strong>${payMethod==='gotovina'?'💵 Gotovina':'💳 Kartica'}</strong></div>
-    ${note?`<div class="srow"><span>Napomena</span><strong>${note}</strong></div>`:''}
-    <div class="srow" style="border-top:1px solid var(--border);margin-top:8px;padding-top:10px"><span style="font-weight:500;color:var(--brown)">Ukupno</span><strong style="font-size:18px;color:var(--gold-dark)">${fmt(total)}</strong></div>
   `;
-  closeCheckout();
-  document.getElementById('successModal').classList.add('open');
 }
 
-function resetApp(){
-  document.getElementById('successModal').classList.remove('open');
-  cart=[];selectedAddons.clear();persons=20;
-  document.getElementById('personsDisplay').textContent=20;
-  ['fName','fPhone','fAddress','fEmail','fNote'].forEach(id=>document.getElementById(id).value='');
-  updateCart();renderPackages();renderAddons();
+function pick(qid, idx, multi) {
+  if (!answers[qid]) answers[qid] = [];
+  if (multi) {
+    const pos = answers[qid].indexOf(idx);
+    if (pos > -1) answers[qid].splice(pos, 1);
+    else answers[qid].push(idx);
+  } else {
+    answers[qid] = [idx];
+  }
+  document.getElementById('errMsg').classList.remove('show');
+  const q = QUESTIONS.find(x => x.id === qid);
+  document.querySelectorAll('.opt').forEach((el, i) => {
+    el.classList.toggle('selected', answers[qid].includes(i));
+  });
 }
 
-function openLogin(){document.getElementById('loginModal').classList.add('open');}
-function closeLogin(){document.getElementById('loginModal').classList.remove('open');}
-
-function switchTab(btn,pane){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('loginPane').style.display=pane==='login'?'block':'none';
-  document.getElementById('registerPane').style.display=pane==='register'?'block':'none';
+function goNext() {
+  const q = QUESTIONS[current];
+  if (!answers[q.id] || answers[q.id].length === 0) {
+    document.getElementById('errMsg').classList.add('show');
+    return;
+  }
+  current++;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function simulateLogin(){
-  closeLogin();loggedIn=true;
-  const email=document.getElementById('loginEmail').value||'korisnik';
-  const name=email.split('@')[0];
-  document.getElementById('loginNavBtn').innerHTML=`<i class="ti ti-user-check" style="font-size:14px"></i> ${name}`;
-  toast('Dobrodošli nazad! 👋');
-  resetSessionTimer();
+function goBack() {
+  if (current > 0) { current--; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 }
 
-function simulateRegister(){
-  closeLogin();loggedIn=true;
-  document.getElementById('loginNavBtn').innerHTML='<i class="ti ti-user-check" style="font-size:14px"></i> Novi korisnik';
-  toast('Registracija uspešna! Dobrodošli! ✅');
-  resetSessionTimer();
+function renderDone(app) {
+  const summaryRows = QUESTIONS.map(q => {
+    const sel = answers[q.id] || [];
+    const chosen = sel.map(i => q.opts[i]).join(', ');
+    return `
+      <div class="sum-row">
+        <div class="sum-q">${q.id}. ${truncate(q.text, 60)}</div>
+        <div class="sum-a">${chosen || '—'}</div>
+      </div>
+    `;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="done-screen">
+      <div class="done-icon-wrap">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M5 14l6 6L23 8" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="done-title">Hvala na odgovorima!</div>
+      <div class="done-sub">
+        Tvoji odgovori pomažu nam da dizajniramo aplikaciju koja odgovara stvarnim potrebama korisnika.<br>
+        Rezultati ankete biće korišćeni u specifikaciji projekta.
+      </div>
+
+      <div class="summary-title">Tvoji odgovori</div>
+      <div class="summary-list">${summaryRows}</div>
+
+      <button class="btn-restart" onclick="restart()">
+        Popuni anketu ponovo
+      </button>
+    </div>
+  `;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function resetSessionTimer(){
-  clearTimeout(sessionTimer);
-  if(loggedIn){sessionTimer=setTimeout(sessionExpired,5*60*1000);}
+function restart() {
+  current = 0;
+  Object.keys(answers).forEach(k => delete answers[k]);
+  render();
 }
 
-function sessionExpired(){
-  loggedIn=false;
-  document.getElementById('loginNavBtn').innerHTML='<i class="ti ti-user" style="font-size:14px"></i> Prijava';
-  document.getElementById('sessionBanner').classList.add('show');
-}
-function hideBanner(){document.getElementById('sessionBanner').classList.remove('show');}
-
-let toastT;
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
-  clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2800);
-}
-
-document.addEventListener('mousemove',resetSessionTimer);
-document.addEventListener('keydown',resetSessionTimer);
-
-renderPackages();renderAddons();
+render();
 </script>
 </body>
 </html>
